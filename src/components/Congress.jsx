@@ -24,8 +24,8 @@ const thematicAreas = [
   'Tecnología e Innovación',
 ]
 
-const menuItems = ['circulares', 'autores', 'faq']
-const menuLabels = { circulares: 'Circulares', autores: 'Guía para Autores', faq: 'Preguntas Frecuentes' }
+const menuItems = ['circulares', 'autores', 'faq', 'comoycuando']
+const menuLabels = { circulares: 'Circulares', autores: 'Guía para Autores', faq: 'Preguntas Frecuentes', comoycuando: 'Cómo y cuándo' }
 
 export default function Congress() {
   const [activeMenu, setActiveMenu] = useState('circulares')
@@ -191,7 +191,7 @@ export default function Congress() {
                   },
                   {
                     q: '¿Hay opciones de alojamiento?',
-                    a: 'Sí. Próximamente publicaremos una lista de alojamientos sugeridos en Esquel con tarifas especiales para congresistas.'
+                    a: 'Sí. Podés consultar opciones de alojamiento en Esquel en el sitio oficial de turismo: turismesquel.com.ar'
                   },
                   {
                     q: '¿Puedo presentar más de un trabajo?',
@@ -204,6 +204,38 @@ export default function Congress() {
                 ].map((item, i) => (
                   <FaqItem key={i} question={item.q} answer={item.a} />
                 ))}
+              </div>
+            </div>
+          )}
+
+          {activeMenu === 'comoycuando' && (
+            <div className="congress-panel">
+              <h3>Cómo y cuándo</h3>
+              <div className="venue-info">
+                <div className="venue-detail"><span className="venue-icon">📅</span><div><strong>Fecha</strong><p>A confirmar — 2026, Esquel, Chubut</p></div></div>
+                <div className="venue-detail"><span className="venue-icon">📍</span><div><strong>Lugar</strong><p>Hotel Melipal, Esquel, Chubut, Argentina</p></div></div>
+                <div className="venue-detail"><span className="venue-icon">🏛️</span><div><strong>Evento simultáneo</strong><p>49° Congreso Argentino de Producción Animal (CAPA 2026)</p></div></div>
+                <div className="venue-detail"><span className="venue-icon">🏨</span><div><strong>Alojamiento</strong><p>Encontrá opciones de alojamiento en Esquel en el sitio oficial de turismo. <a href="https://share.google/QMDPbJXxdNW1FahAn" target="_blank" rel="noopener noreferrer" className="venue-link">Turismo Esquel →</a></p></div></div>
+              </div>
+              <div className="venue-map">
+                <iframe
+                  title="Ubicación Hotel Melipal"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2999.0!2d-71.3167!3d-42.9083!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x961bb9b7b4f7a3e3%3A0x1234567890abcdef!2sHotel%20Melipal%2C%20Esquel!5e0!3m2!1ses!2sar!4v1234567890"
+                  width="100%"
+                  height="320"
+                  style={{ border: 0, borderRadius: '12px' }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+                <a
+                  href="https://share.google/p4KAP4kHelyhMmGKk"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="map-link"
+                >
+                  Abrir en Google Maps →
+                </a>
               </div>
             </div>
           )}
@@ -461,6 +493,34 @@ export default function Congress() {
           .circulars-grid { grid-template-columns: 1fr; }
           .congress-content { padding: 24px 20px; }
         }
+        .venue-info {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+          margin-bottom: 28px;
+        }
+        .venue-detail {
+          display: flex;
+          align-items: flex-start;
+          gap: 14px;
+          background: var(--gray-100);
+          border-radius: 10px;
+          padding: 14px 18px;
+        }
+        .venue-icon { font-size: 22px; flex-shrink: 0; }
+        .venue-link { color: var(--green-main); font-weight: 500; text-decoration: none; }
+        .venue-link:hover { text-decoration: underline; }
+        .venue-detail strong { display: block; font-size: 14px; color: var(--gray-900); margin-bottom: 2px; }
+        .venue-detail p { font-size: 14px; color: var(--gray-500); margin: 0; }
+        .venue-map { display: flex; flex-direction: column; gap: 12px; }
+        .map-link {
+          display: inline-block;
+          font-size: 14px;
+          font-weight: 500;
+          color: var(--green-main);
+          text-decoration: none;
+        }
+        .map-link:hover { text-decoration: underline; }
       `}</style>
     </section>
   )

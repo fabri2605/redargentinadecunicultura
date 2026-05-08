@@ -1,4 +1,28 @@
+import { useState } from 'react'
+import emailjs from '@emailjs/browser'
+
+const SERVICE_ID  = 'service_pqw70pb'
+const TEMPLATE_ID = 'template_mjqyqu7'
+const PUBLIC_KEY  = 'aGWwEIOcSwwRKk7Rx'
+
 export default function Contact() {
+  const [form, setForm] = useState({ nombre: '', email: '', asunto: '', mensaje: '' })
+  const [status, setStatus] = useState(null) // null | 'sending' | 'ok' | 'error'
+
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (!form.nombre || !form.email || !form.mensaje) return
+    setStatus('sending')
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, form, PUBLIC_KEY)
+      .then(() => {
+        setStatus('ok')
+        setForm({ nombre: '', email: '', asunto: '', mensaje: '' })
+      })
+      .catch(() => setStatus('error'))
+  }
+
   return (
     <section id="contacto" className="contact">
       <div className="container">
@@ -58,21 +82,21 @@ export default function Contact() {
 
           <div className="contact-form-wrap">
             <h3>Envianos un mensaje</h3>
-            <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
+            <form className="contact-form" onSubmit={handleSubmit}>
               <div className="form-row">
                 <div className="form-group">
                   <label htmlFor="nombre">Nombre</label>
-                  <input id="nombre" type="text" placeholder="Tu nombre" />
+                  <input id="nombre" name="nombre" type="text" placeholder="Tu nombre" value={form.nombre} onChange={handleChange} required />
                 </div>
                 <div className="form-group">
                   <label htmlFor="email">Email</label>
-                  <input id="email" type="email" placeholder="tu@email.com" />
+                  <input id="email" name="email" type="email" placeholder="tu@email.com" value={form.email} onChange={handleChange} required />
                 </div>
               </div>
               <div className="form-group">
-                <label htmlFor="tema">Tema</label>
-                <select id="tema">
-                  <option value="">Seleccioná un tema</option>
+                <label htmlFor="asunto">Tema</label>
+                <select id="asunto" name="asunto" value={form.asunto} onChange={handleChange}>
+                  <option value="">Seleccioná un asunto</option>
                   <option>Quiero sumarme a la RAC</option>
                   <option>Consulta sobre el Congreso</option>
                   <option>Colaboración institucional</option>
@@ -82,10 +106,18 @@ export default function Contact() {
               </div>
               <div className="form-group">
                 <label htmlFor="mensaje">Mensaje</label>
-                <textarea id="mensaje" rows="4" placeholder="Escribí tu mensaje aquí..." />
+                <textarea id="mensaje" name="mensaje" rows="4" placeholder="Escribí tu mensaje aquí..." value={form.mensaje} onChange={handleChange} required />
               </div>
-              <button type="submit" className="form-submit">
-                Enviar mensaje
+
+              {status === 'ok' && (
+                <div className="form-feedback form-feedback--ok">✅ ¡Mensaje enviado! Te respondemos a la brevedad.</div>
+              )}
+              {status === 'error' && (
+                <div className="form-feedback form-feedback--error">❌ Hubo un error al enviar. Intentá de nuevo o escribinos directo al correo.</div>
+              )}
+
+              <button type="submit" className="form-submit" disabled={status === 'sending'}>
+                {status === 'sending' ? 'Enviando...' : 'Enviar mensaje'}
               </button>
             </form>
           </div>
@@ -180,7 +212,11 @@ export default function Contact() {
           transition: all 0.2s;
           width: 100%;
         }
-        .form-submit:hover { background: var(--green-dark); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(21,137,179,0.3); }
+        .form-submit:hover:not(:disabled) { background: var(--green-dark); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(21,137,179,0.3); }
+        .form-submit:disabled { opacity: 0.7; cursor: not-allowed; }
+        .form-feedback { padding: 12px 16px; border-radius: 8px; font-size: 14px; font-weight: 500; }
+        .form-feedback--ok { background: #e0f5fc; color: #0a5f80; }
+        .form-feedback--error { background: #fde8e8; color: #b91c1c; }
         @media (max-width: 900px) {
           .contact-grid { grid-template-columns: 1fr; gap: 40px; }
         }

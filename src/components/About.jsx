@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import peopleImg from '../assets/people.jpeg'
 
 const tabs = [
   {
@@ -69,17 +70,15 @@ export default function About() {
             ))}
           </div>
           <div className="about-visual">
-            <div className="about-card-accent">
-              <div className="accent-icon">{tab.icon}</div>
-              <h3>{tab.label}</h3>
-              <div className="accent-divider" />
-              <div className="about-pillars">
-                <div className="pillar">🎓 Universidades</div>
-                <div className="pillar">🔬 INTA · CONICET</div>
-                <div className="pillar">🌾 Productores</div>
-                <div className="pillar">📚 Escuelas Agrotécnicas</div>
+            {active === 'historia' ? (
+              <img src={peopleImg} alt="Miembros de la RAC" className="about-people-img" />
+            ) : (
+              <div className="about-card-accent">
+                <div className="accent-icon">{tab.icon}</div>
+                <h3>{tab.label}</h3>
+                <div className="accent-divider" />
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
@@ -171,19 +170,19 @@ export default function About() {
         .accent-icon { font-size: 48px; margin-bottom: 16px; }
         .about-card-accent h3 { font-size: 24px; font-weight: 700; margin-bottom: 20px; }
         .accent-divider { width: 40px; height: 3px; background: rgba(255,255,255,0.4); margin: 0 auto 24px; border-radius: 2px; }
-        .about-pillars { display: flex; flex-direction: column; gap: 10px; }
-        .pillar {
-          background: rgba(255,255,255,0.12);
-          border: 1px solid rgba(255,255,255,0.2);
-          border-radius: 8px;
-          padding: 10px 16px;
-          font-size: 14px;
-          font-weight: 500;
+        .about-people-img {
+          width: 100%;
+          height: auto;
+          object-fit: contain;
+          border-radius: 20px;
+          box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+          position: sticky;
+          top: 90px;
         }
         @media (max-width: 900px) {
           .about-content { grid-template-columns: 1fr; }
           .about-card-accent { position: static; }
-          .about-pillars { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+          .about-people-img { position: static; }
         }
       `}</style>
     </section>
