@@ -36,11 +36,11 @@ export default function Contact() {
             </p>
 
             <div className="contact-items">
-              <a href="mailto:redargentinadecunicultura@gmail.com" className="contact-item">
+              <a href="mailto:eeabalcarce.aapa@inta.gob.ar" className="contact-item">
                 <div className="contact-item-icon">✉️</div>
                 <div>
                   <div className="contact-item-label">Correo electrónico</div>
-                  <div className="contact-item-value">redargentinadecunicultura@gmail.com</div>
+                  <div className="contact-item-value">eeabalcarce.aapa@inta.gob.ar</div>
                 </div>
               </a>
 

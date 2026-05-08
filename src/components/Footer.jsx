@@ -17,7 +17,7 @@ export default function Footer() {
           </div>
           <p>Fortaleciendo la producción cunícola argentina mediante la cooperación interinstitucional desde 2023.</p>
           <div className="footer-social">
-            <a href="mailto:redargentinadecunicultura@gmail.com" className="social-icon" title="Email">✉️</a>
+            <a href="mailto:eeabalcarce.aapa@inta.gob.ar" className="social-icon" title="Email">✉️</a>
             <a href="https://instagram.com/rac_arg" target="_blank" rel="noopener noreferrer" className="social-icon" title="Instagram">📷</a>
             <a href="#" className="social-icon" title="Facebook">👥</a>
             <a href="https://youtube.com/shorts/deEWuPpJ8XA?feature=share" target="_blank" rel="noopener noreferrer" className="social-icon" title="YouTube">▶️</a>

@@ -187,7 +187,7 @@ export default function Congress() {
                   },
                   {
                     q: '¿Cómo me inscribo?',
-                    a: 'Enviá un correo a redargentinadecunicultura@gmail.com indicando que la inscripción es para el VIII Congreso Americano de Cunicultura 2026.'
+                    a: 'Enviá un correo a eeabalcarce.aapa@inta.gob.ar indicando que la inscripción es para el VIII Congreso Americano de Cunicultura 2026.'
                   },
                   {
                     q: '¿Hay opciones de alojamiento?',
