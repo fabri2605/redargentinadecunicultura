@@ -34,7 +34,7 @@ export default function Congress() {
     <section id="congreso" className="congress">
       <div className="congress-header">
         <div className="container">
-          <div className="congress-badge">2026 · Esquel, Chubut</div>
+          <div className="congress-badge">10, 11 y 12 de noviembre 2026 · Esquel, Chubut</div>
           <h2 className="congress-title">
             VIII Congreso Americano<br />de Cunicultura
           </h2>
@@ -155,7 +155,7 @@ export default function Congress() {
                   <div className="step-num">02</div>
                   <div>
                     <h4>Normas de redacción</h4>
-                    <p>Los resúmenes deben seguir el formato establecido en la plantilla oficial. Se aceptarán en español, portugués e inglés. Extensión máxima: 300 palabras.</p>
+                    <p>Los resúmenes deben seguir el formato establecido en la plantilla oficial. Se aceptarán en español, portugués e inglés. Extensión máxima: 1 carilla.</p>
                   </div>
                 </div>
                 <div className="guide-step">
@@ -163,6 +163,7 @@ export default function Congress() {
                   <div>
                     <h4>Envío</h4>
                     <p>Completar el formulario de envío en línea adjuntando el resumen en el formato correspondiente. Se confirmará la recepción por correo electrónico.</p>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfnaC2R3iNVBCr8TfykwlkSC5ytEsMhFw5_zUr2-TaWCMKYZw/viewform" target="_blank" rel="noopener noreferrer" className="submission-btn" style={{ display: 'inline-block', marginTop: '12px' }}>Enviar resumen →</a>
                   </div>
                 </div>
                 <div className="guide-step">
@@ -183,7 +184,7 @@ export default function Congress() {
                 {[
                   {
                     q: '¿Cuándo y dónde se realiza el congreso?',
-                    a: 'El VIII Congreso Americano de Cunicultura se realizará en la Sociedad Rural de Esquel, Chubut, de manera simultánea con el 49° Congreso Argentino de Producción Animal.'
+                    a: 'El VIII Congreso Americano de Cunicultura se realizará los días 10, 11 y 12 de noviembre de 2026 en la Sociedad Rural de Esquel, Chubut, de manera simultánea con el 49° Congreso Argentino de Producción Animal.'
                   },
                   {
                     q: '¿Cómo me inscribo?',
@@ -212,8 +213,8 @@ export default function Congress() {
             <div className="congress-panel">
               <h3>Cómo y cuándo</h3>
               <div className="venue-info">
-                <div className="venue-detail"><span className="venue-icon">📅</span><div><strong>Fecha</strong><p>A confirmar — 2026, Esquel, Chubut</p></div></div>
-                <div className="venue-detail"><span className="venue-icon">📍</span><div><strong>Lugar</strong><p>Hotel Melipal, Esquel, Chubut, Argentina</p></div></div>
+                <div className="venue-detail"><span className="venue-icon">📅</span><div><strong>Fecha</strong><p>10, 11 y 12 de noviembre de 2026 · Esquel, Chubut</p></div></div>
+                <div className="venue-detail"><span className="venue-icon">📍</span><div><strong>Lugar</strong><p>Hotel Melipal · Av. Alvear y Av. Fontana, Esquel, Chubut, Argentina</p></div></div>
                 <div className="venue-detail"><span className="venue-icon">🏛️</span><div><strong>Evento simultáneo</strong><p>49° Congreso Argentino de Producción Animal (CAPA 2026)</p></div></div>
                 <div className="venue-detail"><span className="venue-icon">🏨</span><div><strong>Alojamiento</strong><p>Encontrá opciones de alojamiento en Esquel en el sitio oficial de turismo. <a href="https://share.google/QMDPbJXxdNW1FahAn" target="_blank" rel="noopener noreferrer" className="venue-link">Turismo Esquel →</a></p></div></div>
               </div>
@@ -248,7 +249,7 @@ export default function Congress() {
             <div className="org-group">
               <div className="org-label">Organizan</div>
               <div className="org-logos">
-                {['Facultad Ciencias Veterinarias', 'INTA', 'IGEVET', 'UBA', 'UNLP'].map(o => (
+                {['RAC','SIC', 'ABWRSA'].map(o => (
                   <div key={o} className="org-chip org-chip--organizer">{o}</div>
                 ))}
               </div>
@@ -256,16 +257,8 @@ export default function Congress() {
             <div className="org-group">
               <div className="org-label">Acompañan</div>
               <div className="org-logos">
-                {['WRSA', 'SIC', 'ALPA'].map(o => (
+                {['ALPA', 'ACPA', 'ACBC'].map(o => (
                   <div key={o} className="org-chip org-chip--accompany">{o}</div>
-                ))}
-              </div>
-            </div>
-            <div className="org-group">
-              <div className="org-label">Auspician</div>
-              <div className="org-logos">
-                {['AAPA', 'CONICET'].map(o => (
-                  <div key={o} className="org-chip org-chip--sponsor">{o}</div>
                 ))}
               </div>
             </div>
@@ -440,6 +433,18 @@ export default function Congress() {
         .sub-icon { font-size: 24px; flex-shrink: 0; }
         .sub-title { font-size: 14px; font-weight: 600; color: var(--gray-900); margin-bottom: 2px; }
         .sub-desc { font-size: 12px; color: var(--gray-500); }
+        .submission-btn {
+          flex-shrink: 0;
+          background: var(--green-main);
+          color: white;
+          font-size: 13px;
+          font-weight: 600;
+          padding: 8px 18px;
+          border-radius: 6px;
+          text-decoration: none;
+          transition: background 0.2s;
+        }
+        .submission-btn:hover { background: var(--green-dark); }
         .guide-content { display: flex; flex-direction: column; gap: 24px; }
         .guide-step { display: flex; gap: 20px; }
         .step-num {

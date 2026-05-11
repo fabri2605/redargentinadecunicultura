@@ -1,49 +1,40 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useState } from 'react'
 
-function useCountUp(target, duration = 2000) {
-  const ref = useRef(null)
-  const hasRun = useRef(false)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && !hasRun.current) {
-        hasRun.current = true
-        const start = performance.now()
-        const animate = (now) => {
-          const elapsed = now - start
-          const progress = Math.min(elapsed / duration, 1)
-          const eased = 1 - Math.pow(1 - progress, 3)
-          el.textContent = Math.floor(eased * target).toLocaleString('es-AR')
-          if (progress < 1) requestAnimationFrame(animate)
-        }
-        requestAnimationFrame(animate)
-      }
-    }, { threshold: 0.3 })
-
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [target, duration])
-
-  return ref
-}
-
+/* Estadísticas — comentadas hasta tener datos confirmados
 const stats = [
   { value: 1424, label: 'Miembros activos', suffix: '+' },
   { value: 297038, label: 'Conejos producidos', suffix: '' },
   { value: 400050, label: 'Kg de carne anual', suffix: '' },
   { value: 118063, label: 'Recursos educativos', suffix: '' },
 ]
+*/
 
-function StatCard({ value, label, suffix }) {
-  const ref = useCountUp(value)
+const CONGRESS_DATE = new Date('2026-11-10T00:00:00')
+
+function useCountdown(target) {
+  const calc = () => {
+    const diff = target - Date.now()
+    if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 }
+    return {
+      days:    Math.floor(diff / 86400000),
+      hours:   Math.floor((diff % 86400000) / 3600000),
+      minutes: Math.floor((diff % 3600000) / 60000),
+      seconds: Math.floor((diff % 60000) / 1000),
+    }
+  }
+  const [time, setTime] = useState(calc)
+  useEffect(() => {
+    const id = setInterval(() => setTime(calc()), 1000)
+    return () => clearInterval(id)
+  }, [])
+  return time
+}
+
+function CountdownBlock({ value, label }) {
   return (
     <div className="stat-card">
       <div className="stat-number">
-        <span ref={ref}>0</span>
-        {suffix && <span className="stat-suffix">{suffix}</span>}
+        <span>{String(value).padStart(2, '0')}</span>
       </div>
       <div className="stat-label">{label}</div>
     </div>
@@ -51,6 +42,8 @@ function StatCard({ value, label, suffix }) {
 }
 
 export default function Hero() {
+  const { days, hours, minutes, seconds } = useCountdown(CONGRESS_DATE)
+
   return (
     <section id="inicio" className="hero">
       <div className="hero-bg" />
@@ -91,9 +84,13 @@ export default function Hero() {
       </div>
 
       <div className="hero-stats">
-        {stats.map((s) => (
-          <StatCard key={s.label} {...s} />
-        ))}
+        <div className="countdown-label">VIII Congreso · 10, 11 y 12 de noviembre 2026</div>
+        <div className="countdown-grid">
+          <CountdownBlock value={days}    label="Días" />
+          <CountdownBlock value={hours}   label="Horas" />
+          <CountdownBlock value={minutes} label="Minutos" />
+          <CountdownBlock value={seconds} label="Segundos" />
+        </div>
       </div>
 
       <div className="hero-scroll-indicator">
@@ -196,47 +193,45 @@ export default function Hero() {
         }
         .hero-stats {
           position: relative;
+          width: 100%;
+          max-width: 700px;
+          margin-bottom: 60px;
+          text-align: center;
+        }
+        .countdown-label {
+          font-size: 13px;
+          font-weight: 500;
+          color: rgba(255,255,255,0.7);
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          margin-bottom: 16px;
+        }
+        .countdown-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          gap: 0;
-          width: 100%;
-          max-width: 1000px;
+          gap: 12px;
+        }
+        .stat-card {
           background: rgba(255,255,255,0.08);
           backdrop-filter: blur(10px);
           border: 1px solid rgba(255,255,255,0.15);
           border-radius: 16px;
-          overflow: hidden;
-          margin-bottom: 60px;
-        }
-        .stat-card {
-          padding: 28px 20px;
+          padding: 24px 12px;
           text-align: center;
-          border-right: 1px solid rgba(255,255,255,0.12);
-          transition: background 0.2s;
         }
-        .stat-card:last-child { border-right: none; }
-        .stat-card:hover { background: rgba(255,255,255,0.08); }
         .stat-number {
-          font-size: clamp(1.6rem, 3vw, 2.4rem);
+          font-size: clamp(2rem, 4vw, 3rem);
           font-weight: 800;
           color: white;
           line-height: 1;
           margin-bottom: 8px;
-          display: flex;
-          align-items: baseline;
-          justify-content: center;
-          gap: 2px;
-        }
-        .stat-suffix {
-          font-size: 0.7em;
-          color: #7dd9a2;
         }
         .stat-label {
-          font-size: 12px;
-          color: rgba(255,255,255,0.7);
-          font-weight: 400;
+          font-size: 11px;
+          color: rgba(255,255,255,0.6);
+          font-weight: 500;
           text-transform: uppercase;
-          letter-spacing: 0.5px;
+          letter-spacing: 1px;
         }
         .hero-scroll-indicator {
           position: absolute;
@@ -268,13 +263,8 @@ export default function Hero() {
           100% { top: 150%; }
         }
         @media (max-width: 768px) {
-          .hero-stats { grid-template-columns: repeat(2, 1fr); }
-          .stat-card:nth-child(2) { border-right: none; }
-          .stat-card:nth-child(1), .stat-card:nth-child(2) { border-bottom: 1px solid rgba(255,255,255,0.12); }
+          .countdown-grid { grid-template-columns: repeat(2, 1fr); }
           .hero-content { padding-top: 20px; }
-        }
-        @media (max-width: 480px) {
-          .hero-stats { grid-template-columns: repeat(2, 1fr); }
         }
       `}</style>
     </section>
