@@ -23,16 +23,16 @@ const circulars = [
 ]
 
 const thematicAreas = [
-  'Ambiente y Producción Animal (AP)',
-  'Bienestar Animal y Etología (BAE)',
-  'Calidad de la carne, seguridad de los alimentos y gastronomía (G)',
-  'Enseñanza, Extensión y Vinculación (EEV)',
-  'Genética y Mejoramiento Animal (GM)',
-  'Nutrición y Alimentación Animal (NA)',
-  'Reproducción y Fertilidad (RF)',
-  'Salud Animal (SA)',
-  'Otros',
-  'Monografías o contenido multimedial',
+  { code: 'AP',    title: 'Ambiente y Producción Animal',                              desc: 'Gestión social, ambiental y económica. Trabajos que aborden la cunicultura desde una visión sistémica: rentabilidad económica, impacto en comunidades rurales y modelos productivos sostenibles que minimicen la huella ambiental.' },
+  { code: 'BAE',   title: 'Bienestar Animal y Etología',                               desc: 'Etología, construcciones y bienestar animal. Estudios sobre diseño de instalaciones, enriquecimiento ambiental y protocolos que aseguren el máximo confort biológico, entendiendo que un animal bien tratado es la base de una producción ética y eficiente.' },
+  { code: 'G',     title: 'Calidad de la Carne, Seguridad de los Alimentos y Gastronomía', desc: 'El eslabón final de la cadena. Investigaciones sobre propiedades nutricionales y organolépticas de la carne de conejo, innovaciones en seguridad alimentaria y nuevas tendencias gastronómicas que promuevan su consumo.' },
+  { code: 'EEV',   title: 'Enseñanza, Extensión y Vinculación',                        desc: 'La cunicultura crece cuando el conocimiento se comparte. Trabajos sobre metodologías de enseñanza, programas de transferencia tecnológica al productor y proyectos de vinculación que conecten la academia con el sector productivo.' },
+  { code: 'GM',    title: 'Genética y Mejoramiento Animal',                            desc: 'El núcleo del progreso productivo. Trabajos sobre selección genética, evaluación de razas y líneas, biodiversidad y el uso de herramientas genómicas para optimizar parámetros productivos y adaptabilidad climática en la región americana.' },
+  { code: 'NA',    title: 'Nutrición y Alimentación Animal',                           desc: 'Fisiología digestiva, nutrición básica y nuevos alimentos. Estudios que exploren desde la fisiología digestiva básica hasta la evaluación de materias primas alternativas y aditivos que mejoren la conversión alimenticia sin comprometer la salud animal.' },
+  { code: 'RF',    title: 'Reproducción y Fertilidad',                                 desc: 'El motor de la granja. Avances en inseminación artificial, fisiología reproductiva, manejo de la fertilidad y nuevas tecnologías aplicadas para mejorar los índices de prolificidad y el rendimiento reproductivo general.' },
+  { code: 'SA',    title: 'Salud Animal',                                              desc: 'Patología e Higiene. Trabajos sobre diagnóstico y control de enfermedades, inmunología, higiene de las instalaciones y estrategias que promuevan la reducción del uso de antibióticos.' },
+  { code: 'Otros', title: 'Otros',                                                     desc: 'Mascotas, terapias y usos no tradicionales. Cría de conejos como animales de compañía, su rol en terapias asistidas, producción de pelo/piel y cualquier otra faceta innovadora de la especie en la sociedad moderna.' },
+  { code: 'MM',    title: 'Monografías y Contenido Audiovisual',                       desc: '¡Queremos ver el talento joven! Invitamos a estudiantes a presentar trabajos de revisión técnica o piezas audiovisuales originales que divulguen conocimientos cunícolas de forma creativa y rigurosa.' },
 ]
 
 const menuItems = ['circulares', 'autores', 'faq', 'comoycuando']
@@ -49,6 +49,11 @@ const companions = [
   { name: 'ACPA', logo: acpaLogo },
   { name: 'ACBC', logo: acbcLogo },
 ]
+
+const scrollToContact = (e) => {
+  e.preventDefault()
+  document.querySelector('#contacto')?.scrollIntoView({ behavior: 'smooth' })
+}
 
 export default function Congress() {
   const [activeMenu, setActiveMenu] = useState('circulares')
@@ -67,10 +72,7 @@ export default function Congress() {
           </p>
           <img src={congresLogo} alt="Logo VIII Congreso" className="congress-logo-img" />
           <div className="congress-inscripcion">
-            <a
-              href="mailto:redargentinadecunicultura@gmail.com?subject=Inscripción VIII Congreso Americano de Cunicultura 2026"
-              className="btn-inscribirse"
-            >
+            <a href="#contacto" className="btn-inscribirse" onClick={scrollToContact}>
               Inscribirse
             </a>
           </div>
@@ -131,10 +133,7 @@ export default function Congress() {
                 <h4>Áreas Temáticas</h4>
                 <div className="areas-grid">
                   {thematicAreas.map(area => (
-                    <div key={area} className="area-chip">
-                      <span className="area-dot" />
-                      {area}
-                    </div>
+                    <AreaCard key={area.code} area={area} />
                   ))}
                 </div>
               </div>
@@ -248,7 +247,8 @@ export default function Congress() {
                   },
                   {
                     q: '¿Cómo me inscribo?',
-                    a: 'Para participar del Congreso deberán enviar un correo a redargentinadecunicultura@gmail.com y recibirán toda la información.',
+                    a: 'Para participar del Congreso deberán enviar un correo a ',
+                    scrollLink: { text: 'redargentinadecunicultura@gmail.com', suffix: ' y recibirán toda la información.' },
                   },
                   {
                     q: '¿Hay opciones de alojamiento?',
@@ -264,7 +264,7 @@ export default function Congress() {
                     a: 'Se emitirán certificados de asistencia y de presentación de trabajos en formato digital para todos los participantes.',
                   },
                 ].map((item, i) => (
-                  <FaqItem key={i} question={item.q} answer={item.a} link={item.link} />
+                  <FaqItem key={i} question={item.q} answer={item.a} link={item.link} scrollLink={item.scrollLink} />
                 ))}
               </div>
             </div>
@@ -516,22 +516,45 @@ export default function Congress() {
         .areas-section { margin-bottom: 36px; }
         .areas-grid {
           display: flex;
-          flex-wrap: wrap;
+          flex-direction: column;
           gap: 8px;
         }
-        .area-chip {
-          display: flex;
-          align-items: center;
-          gap: 6px;
+        .area-card {
           background: var(--green-pale);
-          color: var(--green-dark);
-          font-size: 13px;
-          font-weight: 500;
-          padding: 6px 14px;
-          border-radius: 20px;
-          border: 1px solid rgba(21,137,179,0.2);
+          border: 1px solid rgba(21,137,179,0.15);
+          border-radius: 10px;
+          padding: 14px 16px;
+          display: flex;
+          gap: 12px;
+          align-items: flex-start;
+          cursor: pointer;
+          text-align: left;
+          width: 100%;
+          transition: background 0.2s;
         }
-        .area-dot { width: 6px; height: 6px; background: var(--green-main); border-radius: 50%; flex-shrink: 0; }
+        .area-card:hover { background: var(--green-pale); filter: brightness(0.96); }
+        .area-card.open { border-color: var(--green-main); }
+        .area-card-chevron { font-size: 18px; color: var(--green-main); flex-shrink: 0; margin-left: auto; align-self: flex-start; }
+        .area-card-body { flex: 1; }
+        .area-card-code {
+          font-size: 11px;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 1.5px;
+          color: var(--green-main);
+          margin-bottom: 4px;
+        }
+        .area-card-title {
+          font-size: 14px;
+          font-weight: 700;
+          color: var(--gray-900);
+          margin-bottom: 6px;
+        }
+        .area-card-desc {
+          font-size: 12px;
+          color: var(--gray-500);
+          line-height: 1.6;
+        }
         .submission-items { display: flex; flex-direction: column; gap: 12px; }
         .submission-item {
           display: flex;
@@ -638,6 +661,7 @@ export default function Congress() {
         }
         @media (max-width: 600px) {
           .circulars-grid { grid-template-columns: 1fr; }
+          .areas-grid { grid-template-columns: 1fr; }
           .congress-content { padding: 24px 20px; }
           .congress-logo-img { max-height: 120px; }
         }
@@ -646,7 +670,7 @@ export default function Congress() {
   )
 }
 
-function FaqItem({ question, answer, link }) {
+function FaqItem({ question, answer, link, scrollLink }) {
   const [open, setOpen] = useState(false)
   return (
     <div className={`faq-item${open ? ' open' : ''}`}>
@@ -657,6 +681,14 @@ function FaqItem({ question, answer, link }) {
       {open && (
         <div className="faq-a">
           {answer}
+          {scrollLink && (
+            <>
+              <a href="#contacto" className="faq-email-link" onClick={scrollToContact}>
+                {scrollLink.text}
+              </a>
+              {scrollLink.suffix}
+            </>
+          )}
           {link && (
             <a href={link.url} target="_blank" rel="noopener noreferrer" className="faq-link">
               {link.text} →
@@ -686,7 +718,23 @@ function FaqItem({ question, answer, link }) {
         .faq-a { padding: 0 20px 16px; font-size: 14px; color: var(--gray-700); line-height: 1.7; }
         .faq-link { display: block; margin-top: 8px; color: var(--green-main); font-weight: 500; text-decoration: none; }
         .faq-link:hover { text-decoration: underline; }
+        .faq-email-link { color: var(--green-main); font-weight: 600; text-decoration: underline; cursor: pointer; }
+        .faq-email-link:hover { color: var(--green-dark); }
       `}</style>
     </div>
+  )
+}
+
+function AreaCard({ area }) {
+  const [open, setOpen] = useState(false)
+  return (
+    <button className={`area-card${open ? ' open' : ''}`} onClick={() => setOpen(!open)}>
+      <div className="area-card-body">
+        <div className="area-card-code">{area.code}</div>
+        <div className="area-card-title">{area.title}</div>
+        {open && <div className="area-card-desc">{area.desc}</div>}
+      </div>
+      <span className="area-card-chevron">{open ? '−' : '+'}</span>
+    </button>
   )
 }
