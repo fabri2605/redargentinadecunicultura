@@ -1,31 +1,54 @@
 import { useState } from 'react'
+import congresLogo from '../assets/CONGRESO_LOGO.png'
+import racLogo from '../assets/RAC_LOGO.png'
+import sicLogo from '../assets/SIC_LOGO.jpeg'
+import abwrsaLogo from '../assets/ABWRSA_LOGO.jpeg'
+import alpaLogo from '../assets/ALPA_LOGO.jpeg'
+import acpaLogo from '../assets/ACPA_LOGO.png'
+import acbcLogo from '../assets/ACBC_LOGO.jpeg'
 
 const circulars = [
   {
     id: 1,
     title: 'Circular N°1',
     desc: 'Primera circular informativa del VIII Congreso Americano de Cunicultura. Información general, fechas y convocatoria.',
+    url: 'https://drive.google.com/file/d/1cusXVBv-Si2nHt9pC49UlMHY9dHrfdMf/view',
   },
   {
     id: 2,
     title: 'Circular N°2',
     desc: 'Segunda circular con detalles de áreas temáticas, normas de presentación y fechas límite de envío de trabajos.',
+    url: null,
   },
 ]
 
 const thematicAreas = [
-  'Genética y Mejoramiento',
-  'Nutrición y Alimentación',
-  'Sanidad y Bienestar Animal',
-  'Reproducción y Manejo Reproductivo',
-  'Producción y Sistemas Productivos',
-  'Economía y Mercados',
-  'Extensión y Educación',
-  'Tecnología e Innovación',
+  'Ambiente y Producción Animal (AP)',
+  'Bienestar Animal y Etología (BAE)',
+  'Calidad de la carne, seguridad de los alimentos y gastronomía (G)',
+  'Enseñanza, Extensión y Vinculación (EEV)',
+  'Genética y Mejoramiento Animal (GM)',
+  'Nutrición y Alimentación Animal (NA)',
+  'Reproducción y Fertilidad (RF)',
+  'Salud Animal (SA)',
+  'Otros',
+  'Monografías o contenido multimedial',
 ]
 
 const menuItems = ['circulares', 'autores', 'faq', 'comoycuando']
 const menuLabels = { circulares: 'Circulares', autores: 'Guía para Autores', faq: 'Preguntas Frecuentes', comoycuando: 'Cómo y cuándo' }
+
+const organizers = [
+  { name: 'RAC', logo: racLogo },
+  { name: 'SIC', logo: sicLogo },
+  { name: 'AB WRSA', logo: abwrsaLogo },
+]
+
+const companions = [
+  { name: 'ALPA', logo: alpaLogo },
+  { name: 'ACPA', logo: acpaLogo },
+  { name: 'ACBC', logo: acbcLogo },
+]
 
 export default function Congress() {
   const [activeMenu, setActiveMenu] = useState('circulares')
@@ -34,7 +57,7 @@ export default function Congress() {
     <section id="congreso" className="congress">
       <div className="congress-header">
         <div className="container">
-          <div className="congress-badge">10, 11 y 12 de noviembre 2026 · Esquel, Chubut</div>
+          <div className="congress-badge">11, 12 y 13 de noviembre 2026 · Esquel, Chubut</div>
           <h2 className="congress-title">
             VIII Congreso Americano<br />de Cunicultura
           </h2>
@@ -42,6 +65,15 @@ export default function Congress() {
             Un espacio estratégico para el intercambio de conocimientos y experiencias
             en producción cunícola a nivel continental.
           </p>
+          <img src={congresLogo} alt="Logo VIII Congreso" className="congress-logo-img" />
+          <div className="congress-inscripcion">
+            <a
+              href="mailto:redargentinadecunicultura@gmail.com?subject=Inscripción VIII Congreso Americano de Cunicultura 2026"
+              className="btn-inscribirse"
+            >
+              Inscribirse
+            </a>
+          </div>
         </div>
       </div>
 
@@ -64,7 +96,7 @@ export default function Congress() {
             <div className="event-info-divider" />
             <p>
               El congreso se desarrollará de manera simultánea con el{' '}
-              <strong>49° Congreso Argentino de Producción Animal</strong> en la Sociedad Rural de Esquel.
+              <strong>49° Congreso Argentino de Producción Animal</strong> en Esquel.
             </p>
             <a
               href="https://www.aapa.org.ar/49capa/"
@@ -87,7 +119,10 @@ export default function Congress() {
                     <div className="circular-number">N°{c.id}</div>
                     <h4>{c.title}</h4>
                     <p>{c.desc}</p>
-                    <button className="circular-btn">Descargar PDF</button>
+                    {c.url
+                      ? <a href={c.url} target="_blank" rel="noopener noreferrer" className="circular-btn">Ver PDF</a>
+                      : <button className="circular-btn" disabled style={{ opacity: 0.5, cursor: 'not-allowed' }}>Próximamente</button>
+                    }
                   </div>
                 ))}
               </div>
@@ -107,32 +142,40 @@ export default function Congress() {
               <div className="submission-section">
                 <h4>Envío de Trabajos</h4>
                 <div className="submission-items">
-                  <a href="#" className="submission-item">
+                  <a
+                    href="https://drive.google.com/file/d/19Z-s3rO2Nk3YelBTbJeXRjBFmqW_PSRa/view?usp=drive_link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="submission-item"
+                  >
                     <span className="sub-icon">📄</span>
                     <div>
                       <div className="sub-title">Normas de Redacción</div>
-                      <div className="sub-desc">Instrucciones para la preparación del manuscrito</div>
+                      <div className="sub-desc">Descargar normas de presentación</div>
                     </div>
                   </a>
-                  <a href="#" className="submission-item">
-                    <span className="sub-icon">📋</span>
-                    <div>
-                      <div className="sub-title">Plantilla de Resúmenes</div>
-                      <div className="sub-desc">Formato oficial para presentación de resúmenes</div>
-                    </div>
-                  </a>
-                  <a href="#" className="submission-item">
-                    <span className="sub-icon">🖼️</span>
-                    <div>
-                      <div className="sub-title">Plantilla de Poster</div>
-                      <div className="sub-desc">Versión papel y digital disponibles</div>
-                    </div>
-                  </a>
-                  <a href="#" className="submission-item">
+                  <a
+                    href="https://forms.gle/DcX6t3P9YoJtf3cF8"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="submission-item"
+                  >
                     <span className="sub-icon">📤</span>
                     <div>
-                      <div className="sub-title">Formulario de Envío</div>
-                      <div className="sub-desc">Portal de carga de trabajos en línea</div>
+                      <div className="sub-title">Envío de resúmenes</div>
+                      <div className="sub-desc">Formulario para el envío</div>
+                    </div>
+                  </a>
+                  <a
+                    href="https://drive.google.com/drive/folders/1IawWXrDcFvADIlRtfUP7AgHU7XLeCzII?usp=sharing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="submission-item"
+                  >
+                    <span className="sub-icon">🖼️</span>
+                    <div>
+                      <div className="sub-title">Plantilla para póster y ejemplos</div>
+                      <div className="sub-desc">Descargar plantilla de póster y ejemplos</div>
                     </div>
                   </a>
                 </div>
@@ -155,7 +198,16 @@ export default function Congress() {
                   <div className="step-num">02</div>
                   <div>
                     <h4>Normas de redacción</h4>
-                    <p>Los resúmenes deben seguir el formato establecido en la plantilla oficial. Se aceptarán en español, portugués e inglés. Extensión máxima: 1 carilla.</p>
+                    <p>Los resúmenes deben seguir el formato establecido en la plantilla oficial. Se aceptarán en español o inglés. Extensión máxima: 1 carilla.</p>
+                    <a
+                      href="https://drive.google.com/drive/folders/1IawWXrDcFvADIlRtfUP7AgHU7XLeCzII?usp=sharing"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="submission-btn"
+                      style={{ display: 'inline-block', marginTop: '12px' }}
+                    >
+                      Normas de presentación y plantillas →
+                    </a>
                   </div>
                 </div>
                 <div className="guide-step">
@@ -163,7 +215,15 @@ export default function Congress() {
                   <div>
                     <h4>Envío</h4>
                     <p>Completar el formulario de envío en línea adjuntando el resumen en el formato correspondiente. Se confirmará la recepción por correo electrónico.</p>
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfnaC2R3iNVBCr8TfykwlkSC5ytEsMhFw5_zUr2-TaWCMKYZw/viewform" target="_blank" rel="noopener noreferrer" className="submission-btn" style={{ display: 'inline-block', marginTop: '12px' }}>Enviar resumen →</a>
+                    <a
+                      href="https://forms.gle/DcX6t3P9YoJtf3cF8"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="submission-btn"
+                      style={{ display: 'inline-block', marginTop: '12px' }}
+                    >
+                      Formulario para el envío →
+                    </a>
                   </div>
                 </div>
                 <div className="guide-step">
@@ -184,26 +244,27 @@ export default function Congress() {
                 {[
                   {
                     q: '¿Cuándo y dónde se realiza el congreso?',
-                    a: 'El VIII Congreso Americano de Cunicultura se realizará los días 10, 11 y 12 de noviembre de 2026 en la Sociedad Rural de Esquel, Chubut, de manera simultánea con el 49° Congreso Argentino de Producción Animal.'
+                    a: 'El VIII Congreso Americano de Cunicultura se realizará los días 11, 12 y 13 de noviembre de 2026 en el Centro Cultural Melipal de Esquel, provincia de Chubut, de manera simultánea con el 49° Congreso Argentino de Producción Animal.',
                   },
                   {
                     q: '¿Cómo me inscribo?',
-                    a: 'Enviá un correo a eeabalcarce.aapa@inta.gob.ar indicando que la inscripción es para el VIII Congreso Americano de Cunicultura 2026.'
+                    a: 'Para participar del Congreso deberán enviar un correo a redargentinadecunicultura@gmail.com y recibirán toda la información.',
                   },
                   {
                     q: '¿Hay opciones de alojamiento?',
-                    a: 'Sí. Podés consultar opciones de alojamiento en Esquel en el sitio oficial de turismo: turismesquel.com.ar'
+                    a: null,
+                    link: { text: 'Ver opciones de alojamiento en Esquel', url: 'https://www.esquel.tur.ar/planifica/alojamiento/' },
                   },
                   {
                     q: '¿Puedo presentar más de un trabajo?',
-                    a: 'Sí, cada autor puede presentar hasta 6 trabajos. Consultar las normas específicas en la guía para autores.'
+                    a: 'Sí, cada autor puede presentar hasta 6 trabajos. Consultar las normas específicas en la guía para autores.',
                   },
                   {
                     q: '¿Se entregan certificados?',
-                    a: 'Se emitirán certificados de asistencia y de presentación de trabajos en formato digital para todos los participantes.'
+                    a: 'Se emitirán certificados de asistencia y de presentación de trabajos en formato digital para todos los participantes.',
                   },
                 ].map((item, i) => (
-                  <FaqItem key={i} question={item.q} answer={item.a} />
+                  <FaqItem key={i} question={item.q} answer={item.a} link={item.link} />
                 ))}
               </div>
             </div>
@@ -213,15 +274,44 @@ export default function Congress() {
             <div className="congress-panel">
               <h3>Cómo y cuándo</h3>
               <div className="venue-info">
-                <div className="venue-detail"><span className="venue-icon">📅</span><div><strong>Fecha</strong><p>10, 11 y 12 de noviembre de 2026 · Esquel, Chubut</p></div></div>
-                <div className="venue-detail"><span className="venue-icon">📍</span><div><strong>Lugar</strong><p>Hotel Melipal · Av. Alvear y Av. Fontana, Esquel, Chubut, Argentina</p></div></div>
-                <div className="venue-detail"><span className="venue-icon">🏛️</span><div><strong>Evento simultáneo</strong><p>49° Congreso Argentino de Producción Animal (CAPA 2026)</p></div></div>
-                <div className="venue-detail"><span className="venue-icon">🏨</span><div><strong>Alojamiento</strong><p>Encontrá opciones de alojamiento en Esquel en el sitio oficial de turismo. <a href="https://share.google/QMDPbJXxdNW1FahAn" target="_blank" rel="noopener noreferrer" className="venue-link">Turismo Esquel →</a></p></div></div>
+                <div className="venue-detail">
+                  <span className="venue-icon">📅</span>
+                  <div>
+                    <strong>Fecha</strong>
+                    <p>11, 12 y 13 de noviembre de 2026. En Esquel, Chubut. Patagonia Argentina.</p>
+                  </div>
+                </div>
+                <div className="venue-detail">
+                  <span className="venue-icon">📍</span>
+                  <div>
+                    <strong>Lugar</strong>
+                    <p>Centro Cultural Melipal · Av. Alvear y Av. Fontana, Esquel, Chubut, Argentina</p>
+                  </div>
+                </div>
+                <div className="venue-detail">
+                  <span className="venue-icon">🏛️</span>
+                  <div>
+                    <strong>Evento simultáneo</strong>
+                    <p>49° Congreso Argentino de Producción Animal (CAPA 2026)</p>
+                  </div>
+                </div>
+                <div className="venue-detail">
+                  <span className="venue-icon">🏨</span>
+                  <div>
+                    <strong>Alojamiento</strong>
+                    <p>
+                      Encontrá opciones de alojamiento en Esquel.{' '}
+                      <a href="https://www.esquel.tur.ar/planifica/alojamiento/" target="_blank" rel="noopener noreferrer" className="venue-link">
+                        Ver alojamientos →
+                      </a>
+                    </p>
+                  </div>
+                </div>
               </div>
               <div className="venue-map">
                 <iframe
-                  title="Ubicación Hotel Melipal"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2999.0!2d-71.3167!3d-42.9083!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x961bb9b7b4f7a3e3%3A0x1234567890abcdef!2sHotel%20Melipal%2C%20Esquel!5e0!3m2!1ses!2sar!4v1234567890"
+                  title="Ubicación Centro Cultural Melipal"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2999.0!2d-71.3167!3d-42.9083!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x961bb9b7b4f7a3e3%3A0x1234567890abcdef!2sMelipal%2C%20Esquel!5e0!3m2!1ses!2sar!4v1234567890"
                   width="100%"
                   height="320"
                   style={{ border: 0, borderRadius: '12px' }}
@@ -230,7 +320,7 @@ export default function Congress() {
                   referrerPolicy="no-referrer-when-downgrade"
                 />
                 <a
-                  href="https://share.google/p4KAP4kHelyhMmGKk"
+                  href="https://share.google/cTMeUWPSCjaSddgOh"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="map-link"
@@ -249,16 +339,16 @@ export default function Congress() {
             <div className="org-group">
               <div className="org-label">Organizan</div>
               <div className="org-logos">
-                {['RAC','SIC', 'ABWRSA'].map(o => (
-                  <div key={o} className="org-chip org-chip--organizer">{o}</div>
+                {organizers.map(o => (
+                  <img key={o.name} src={o.logo} alt={o.name} className="org-logo-img" title={o.name} />
                 ))}
               </div>
             </div>
             <div className="org-group">
               <div className="org-label">Acompañan</div>
               <div className="org-logos">
-                {['ALPA', 'ACPA', 'ACBC'].map(o => (
-                  <div key={o} className="org-chip org-chip--accompany">{o}</div>
+                {companions.map(o => (
+                  <img key={o.name} src={o.logo} alt={o.name} className="org-logo-img" title={o.name} />
                 ))}
               </div>
             </div>
@@ -298,9 +388,32 @@ export default function Congress() {
           font-size: 1.1rem;
           color: rgba(255,255,255,0.75);
           max-width: 560px;
-          margin: 0 auto;
+          margin: 0 auto 28px;
           line-height: 1.7;
         }
+        .congress-logo-img {
+          display: block;
+          max-width: 100%;
+          width: 100vw;
+          max-height: 180px;
+          object-fit: contain;
+          margin: 0 auto 28px;
+        }
+        .congress-inscripcion { margin-top: 8px; }
+        .btn-inscribirse {
+          display: inline-block;
+          background: white;
+          color: #0c2d5a;
+          font-size: 16px;
+          font-weight: 700;
+          padding: 14px 40px;
+          border-radius: 50px;
+          text-decoration: none;
+          box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+          transition: all 0.2s;
+          letter-spacing: 0.5px;
+        }
+        .btn-inscribirse:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
         .congress-body {
           padding: 48px 24px;
           display: grid;
@@ -330,7 +443,7 @@ export default function Congress() {
         .congress-nav-btn.active {
           background: var(--green-main);
           color: white;
-          box-shadow: 0 2px 8px rgba(45,122,71,0.3);
+          box-shadow: 0 2px 8px rgba(21,137,179,0.3);
         }
         .event-info-card {
           background: white;
@@ -382,12 +495,14 @@ export default function Congress() {
         .circular-card h4 { font-size: 16px; font-weight: 700; color: var(--gray-900); margin-bottom: 8px; }
         .circular-card p { font-size: 14px; color: var(--gray-500); line-height: 1.6; margin-bottom: 16px; }
         .circular-btn {
+          display: inline-block;
           background: var(--green-main);
           color: white;
           font-size: 13px;
           font-weight: 600;
           padding: 8px 18px;
           border-radius: 6px;
+          text-decoration: none;
           transition: background 0.2s;
         }
         .circular-btn:hover { background: var(--green-dark); }
@@ -414,7 +529,7 @@ export default function Congress() {
           font-weight: 500;
           padding: 6px 14px;
           border-radius: 20px;
-          border: 1px solid rgba(45,122,71,0.2);
+          border: 1px solid rgba(21,137,179,0.2);
         }
         .area-dot { width: 6px; height: 6px; background: var(--green-main); border-radius: 50%; flex-shrink: 0; }
         .submission-items { display: flex; flex-direction: column; gap: 12px; }
@@ -476,28 +591,17 @@ export default function Congress() {
           text-transform: uppercase;
           letter-spacing: 2px;
           color: var(--gray-500);
-          margin-bottom: 12px;
+          margin-bottom: 16px;
         }
-        .org-logos { display: flex; flex-wrap: wrap; gap: 8px; }
-        .org-chip {
-          padding: 8px 16px;
-          border-radius: 8px;
-          font-size: 13px;
-          font-weight: 600;
+        .org-logos { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+        .org-logo-img {
+          height: 56px;
+          width: auto;
+          object-fit: contain;
+          filter: grayscale(20%);
+          transition: filter 0.2s;
         }
-        .org-chip--organizer { background: var(--green-pale); color: var(--green-dark); }
-        .org-chip--accompany { background: var(--blue-pale); color: var(--blue-dark); }
-        .org-chip--sponsor { background: #fff8e8; color: #92500f; border: 1px solid #f0d090; }
-        @media (max-width: 900px) {
-          .congress-body { grid-template-columns: 1fr; }
-          .congress-sidebar { display: flex; flex-direction: column; gap: 16px; }
-          .congress-nav { flex-direction: row; flex-wrap: wrap; }
-          .congress-nav-btn { padding: 8px 14px; font-size: 13px; }
-        }
-        @media (max-width: 600px) {
-          .circulars-grid { grid-template-columns: 1fr; }
-          .congress-content { padding: 24px 20px; }
-        }
+        .org-logo-img:hover { filter: grayscale(0%); }
         .venue-info {
           display: flex;
           flex-direction: column;
@@ -526,12 +630,23 @@ export default function Congress() {
           text-decoration: none;
         }
         .map-link:hover { text-decoration: underline; }
+        @media (max-width: 900px) {
+          .congress-body { grid-template-columns: 1fr; }
+          .congress-sidebar { display: flex; flex-direction: column; gap: 16px; }
+          .congress-nav { flex-direction: row; flex-wrap: wrap; }
+          .congress-nav-btn { padding: 8px 14px; font-size: 13px; }
+        }
+        @media (max-width: 600px) {
+          .circulars-grid { grid-template-columns: 1fr; }
+          .congress-content { padding: 24px 20px; }
+          .congress-logo-img { max-height: 120px; }
+        }
       `}</style>
     </section>
   )
 }
 
-function FaqItem({ question, answer }) {
+function FaqItem({ question, answer, link }) {
   const [open, setOpen] = useState(false)
   return (
     <div className={`faq-item${open ? ' open' : ''}`}>
@@ -539,7 +654,16 @@ function FaqItem({ question, answer }) {
         {question}
         <span className="faq-chevron">{open ? '−' : '+'}</span>
       </button>
-      {open && <div className="faq-a">{answer}</div>}
+      {open && (
+        <div className="faq-a">
+          {answer}
+          {link && (
+            <a href={link.url} target="_blank" rel="noopener noreferrer" className="faq-link">
+              {link.text} →
+            </a>
+          )}
+        </div>
+      )}
       <style>{`
         .faq-item { background: var(--gray-100); border-radius: 10px; overflow: hidden; }
         .faq-item.open { background: var(--green-pale); }
@@ -560,6 +684,8 @@ function FaqItem({ question, answer }) {
         }
         .faq-chevron { font-size: 20px; color: var(--green-main); flex-shrink: 0; font-weight: 400; }
         .faq-a { padding: 0 20px 16px; font-size: 14px; color: var(--gray-700); line-height: 1.7; }
+        .faq-link { display: block; margin-top: 8px; color: var(--green-main); font-weight: 500; text-decoration: none; }
+        .faq-link:hover { text-decoration: underline; }
       `}</style>
     </div>
   )

@@ -9,7 +9,7 @@ const stats = [
 ]
 */
 
-const CONGRESS_DATE = new Date('2026-11-10T00:00:00')
+const CONGRESS_DATE = new Date('2026-11-11T00:00:00')
 
 function useCountdown(target) {
   const calc = () => {
@@ -84,7 +84,7 @@ export default function Hero() {
       </div>
 
       <div className="hero-stats">
-        <div className="countdown-label">VIII Congreso · 10, 11 y 12 de noviembre 2026</div>
+        <div className="countdown-label">VIII Congreso · 11, 12 y 13 de noviembre 2026</div>
         <div className="countdown-grid">
           <CountdownBlock value={days}    label="Días" />
           <CountdownBlock value={hours}   label="Horas" />

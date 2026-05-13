@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import peopleImg from '../assets/people.jpeg'
 import rabbitsImg from '../assets/Rabbits.jpeg'
+import misionImg from '../assets/MISION.jpeg'
 
 const tabs = [
   {
@@ -75,6 +76,8 @@ export default function About() {
               <img src={peopleImg} alt="Miembros de la RAC" className="about-people-img" />
             ) : active === 'vision' ? (
               <img src={rabbitsImg} alt="Conejos" className="about-people-img" />
+            ) : active === 'mision' ? (
+              <img src={misionImg} alt="Misión RAC" className="about-people-img" />
             ) : (
               <div className="about-card-accent">
                 <div className="accent-icon">{tab.icon}</div>
