@@ -348,7 +348,7 @@ export default function Congress() {
               <div className="org-label">Acompañan</div>
               <div className="org-logos">
                 {companions.map(o => (
-                  <img key={o.name} src={o.logo} alt={o.name} className="org-logo-img" title={o.name} />
+                  <img key={o.name} src={o.logo} alt={o.name} className="org-logo-img org-logo-companion" title={o.name} />
                 ))}
               </div>
             </div>
@@ -618,13 +618,14 @@ export default function Congress() {
         }
         .org-logos { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
         .org-logo-img {
-          height: 56px;
+          height: 110px;
           width: auto;
           object-fit: contain;
           filter: grayscale(20%);
           transition: filter 0.2s;
         }
         .org-logo-img:hover { filter: grayscale(0%); }
+        .org-logo-companion { height: 72px; }
         .venue-info {
           display: flex;
           flex-direction: column;

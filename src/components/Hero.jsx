@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import racLogoText from '../assets/RAC_LOGO.png'
+//import racLogoText from '../assets/RAC_LOGO_text.png'
 
 /* Estadísticas — comentadas hasta tener datos confirmados
 const stats = [
@@ -48,6 +50,7 @@ export default function Hero() {
     <section id="inicio" className="hero">
       <div className="hero-bg" />
       <div className="hero-overlay" />
+      <img src={racLogoText} alt="" className="hero-logo-bg" aria-hidden="true" />
 
       <div className="hero-content">
         <div className="hero-badge">Desde mayo 2023</div>
@@ -117,6 +120,20 @@ export default function Hero() {
           position: absolute;
           inset: 0;
           background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .hero-logo-bg {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          opacity: 0.10;
+          pointer-events: none;
+          user-select: none;
+          mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 20%, transparent 75%);
+          -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 20%, transparent 75%);
         }
         .hero-content {
           position: relative;
@@ -265,6 +282,7 @@ export default function Hero() {
         @media (max-width: 768px) {
           .countdown-grid { grid-template-columns: repeat(2, 1fr); }
           .hero-content { padding-top: 20px; }
+          .hero-logo-bg { display: none; }
         }
       `}</style>
     </section>

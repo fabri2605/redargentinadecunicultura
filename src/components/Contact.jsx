@@ -1,6 +1,31 @@
 import { useState } from 'react'
 import emailjs from '@emailjs/browser'
 
+const SvgEmail = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="22" height="22">
+    <rect x="2" y="4" width="20" height="16" rx="2"/>
+    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+  </svg>
+)
+const SvgInstagram = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="22" height="22">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+    <circle cx="12" cy="12" r="4"/>
+    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+  </svg>
+)
+const SvgFacebook = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22">
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+  </svg>
+)
+const SvgYoutube = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22">
+    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
+    <polygon fill="white" points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/>
+  </svg>
+)
+
 const SERVICE_ID  = 'service_pqw70pb'
 const TEMPLATE_ID = 'template_mjqyqu7'
 const PUBLIC_KEY  = 'aGWwEIOcSwwRKk7Rx'
@@ -37,7 +62,7 @@ export default function Contact() {
 
             <div className="contact-items">
               <a href="mailto:redargentinadecunicultura@gmail.com" className="contact-item">
-                <div className="contact-item-icon">✉️</div>
+                <div className="contact-item-icon"><SvgEmail /></div>
                 <div>
                   <div className="contact-item-label">Correo electrónico</div>
                   <div className="contact-item-value">redargentinadecunicultura@gmail.com</div>
@@ -50,7 +75,7 @@ export default function Contact() {
                 rel="noopener noreferrer"
                 className="contact-item"
               >
-                <div className="contact-item-icon">📷</div>
+                <div className="contact-item-icon"><SvgInstagram /></div>
                 <div>
                   <div className="contact-item-label">Instagram</div>
                   <div className="contact-item-value">@rac_arg</div>
@@ -58,7 +83,7 @@ export default function Contact() {
               </a>
 
               <a href="https://www.facebook.com/share/1CdyeyimQs/" target="_blank" rel="noopener noreferrer" className="contact-item">
-                <div className="contact-item-icon">👥</div>
+                <div className="contact-item-icon"><SvgFacebook /></div>
                 <div>
                   <div className="contact-item-label">Facebook</div>
                   <div className="contact-item-value">Red Argentina de Cunicultura</div>
@@ -71,7 +96,7 @@ export default function Contact() {
                 rel="noopener noreferrer"
                 className="contact-item"
               >
-                <div className="contact-item-icon">▶️</div>
+                <div className="contact-item-icon"><SvgYoutube /></div>
                 <div>
                   <div className="contact-item-label">Canal YouTube</div>
                   <div className="contact-item-value">RAC Argentina</div>
@@ -165,7 +190,7 @@ export default function Contact() {
           cursor: pointer;
         }
         .contact-item:hover { background: rgba(255,255,255,0.15); transform: translateX(4px); }
-        .contact-item-icon { font-size: 22px; flex-shrink: 0; }
+        .contact-item-icon { font-size: 22px; flex-shrink: 0; color: rgba(255,255,255,0.85); display: flex; align-items: center; justify-content: center; }
         .contact-item-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.5); margin-bottom: 2px; }
         .contact-item-value { font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.9); }
         .contact-form-wrap {
