@@ -61,7 +61,7 @@ export default function Footer() {
               ['Inicio', '#inicio'],
               ['Quiénes Somos', '#quienes-somos'],
               ['Congreso', '#congreso'],
-              ['Publicaciones', '#publicaciones'],
+              /* ['Publicaciones', '#publicaciones'], */
               ['Contacto', '#contacto'],
             ].map(([label, href]) => (
               <li key={href}>
@@ -82,14 +82,14 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div className="footer-links">
+        {/* <div className="footer-links">
           <h4>Publicaciones</h4>
           <ul>
             <li><a href="#">Manuales INTA</a></li>
             <li><a href="#">Saber Cunícola</a></li>
             <li><a href="#">Publicaciones RAC</a></li>
           </ul>
-        </div>
+        </div> */}
       </div>
 
       <div className="footer-bottom">

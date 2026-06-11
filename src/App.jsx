@@ -11,14 +11,14 @@ import Footer from './components/Footer'
 function App() {
   return (
     <>
-      <DevBanner />
+      {/* <DevBanner /> */}
       <Navbar />
       <main>
         <Hero />
         <About />
         <VideoSection />
         <Congress />
-        <Publications />
+        {/* <Publications /> */}
         <Contact />
       </main>
       <Footer />

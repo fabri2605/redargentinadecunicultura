@@ -5,7 +5,7 @@ const navLinks = [
   { label: 'Inicio', href: '#inicio' },
   { label: 'Quiénes Somos', href: '#quienes-somos' },
   { label: 'Congreso', href: '#congreso' },
-  { label: 'Publicaciones', href: '#publicaciones' },
+  /* { label: 'Publicaciones', href: '#publicaciones' }, */
   { label: 'Contacto', href: '#contacto' },
 ]
 

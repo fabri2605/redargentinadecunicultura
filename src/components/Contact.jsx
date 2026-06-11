@@ -125,7 +125,7 @@ export default function Contact() {
                   <option>Quiero sumarme a la RAC</option>
                   <option>Consulta sobre el Congreso</option>
                   <option>Colaboración institucional</option>
-                  <option>Publicaciones</option>
+                  {/* <option>Publicaciones</option> */}
                   <option>Otro</option>
                 </select>
               </div>
