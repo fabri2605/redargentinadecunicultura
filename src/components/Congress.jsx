@@ -254,6 +254,7 @@ export default function Congress() {
                     q: '¿Hay opciones de alojamiento?',
                     a: null,
                     link: { text: 'Ver opciones de alojamiento en Esquel', url: 'https://www.esquel.tur.ar/planifica/alojamiento/' },
+                    note: { text: 'Por consultas turísticas y de alojamiento escribir a: ', email: 'congresoAAPA2026@gmail.com' },
                   },
                   {
                     q: '¿Puedo presentar más de un trabajo?',
@@ -264,7 +265,7 @@ export default function Congress() {
                     a: 'Se emitirán certificados de asistencia y de presentación de trabajos en formato digital para todos los participantes.',
                   },
                 ].map((item, i) => (
-                  <FaqItem key={i} question={item.q} answer={item.a} link={item.link} scrollLink={item.scrollLink} />
+                  <FaqItem key={i} question={item.q} answer={item.a} link={item.link} scrollLink={item.scrollLink} note={item.note} />
                 ))}
               </div>
             </div>
@@ -671,7 +672,7 @@ export default function Congress() {
   )
 }
 
-function FaqItem({ question, answer, link, scrollLink }) {
+function FaqItem({ question, answer, link, scrollLink, note }) {
   const [open, setOpen] = useState(false)
   return (
     <div className={`faq-item${open ? ' open' : ''}`}>
@@ -694,6 +695,12 @@ function FaqItem({ question, answer, link, scrollLink }) {
             <a href={link.url} target="_blank" rel="noopener noreferrer" className="faq-link">
               {link.text} →
             </a>
+          )}
+          {note && (
+            <p className="faq-note">
+              {note.text}
+              <a href={`mailto:${note.email}`} className="faq-email-link">{note.email}</a>
+            </p>
           )}
         </div>
       )}
@@ -719,6 +726,7 @@ function FaqItem({ question, answer, link, scrollLink }) {
         .faq-a { padding: 0 20px 16px; font-size: 14px; color: var(--gray-700); line-height: 1.7; }
         .faq-link { display: block; margin-top: 8px; color: var(--green-main); font-weight: 500; text-decoration: none; }
         .faq-link:hover { text-decoration: underline; }
+        .faq-note { margin-top: 10px; font-size: 14px; color: var(--gray-700); line-height: 1.7; }
         .faq-email-link { color: var(--green-main); font-weight: 600; text-decoration: underline; cursor: pointer; }
         .faq-email-link:hover { color: var(--green-dark); }
       `}</style>
