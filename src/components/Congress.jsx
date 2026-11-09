@@ -22,6 +22,8 @@ const thematicAreas = [
   { code: 'MM',    title: 'Monografías y Contenido Audiovisual',                       desc: '¡Queremos ver el talento joven! Invitamos a estudiantes a presentar trabajos de revisión técnica o piezas audiovisuales originales que divulguen conocimientos cunícolas de forma creativa y rigurosa.' },
 ]
 
+const programUrl = 'https://drive.google.com/file/d/1WaDNcnRHmP_j2tsYAOhlGOUt_fDQPyR2/view'
+
 const menuItems = ['circulares', 'autores', 'faq', 'comoycuando']
 const menuLabels = { circulares: 'Circulares', autores: 'Guía para Autores', faq: 'Preguntas Frecuentes', comoycuando: 'Cómo y cuándo' }
 
@@ -73,6 +75,14 @@ export default function Congress() {
           <div className="congress-inscripcion">
             <a href="#contacto" className="btn-inscribirse" onClick={scrollToContact}>
               Inscribirse
+            </a>
+            <a
+              href={programUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-programa"
+            >
+              Ver programa
             </a>
           </div>
         </div>
@@ -399,7 +409,31 @@ export default function Congress() {
           object-fit: contain;
           margin: 0 auto 28px;
         }
-        .congress-inscripcion { margin-top: 8px; }
+        .congress-inscripcion {
+          margin-top: 8px;
+          display: flex;
+          gap: 12px;
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+        .btn-programa {
+          display: inline-block;
+          background: transparent;
+          color: white;
+          font-size: 16px;
+          font-weight: 700;
+          padding: 14px 40px;
+          border: 2px solid rgba(255,255,255,0.7);
+          border-radius: 50px;
+          text-decoration: none;
+          transition: all 0.2s;
+          letter-spacing: 0.5px;
+        }
+        .btn-programa:hover {
+          background: rgba(255,255,255,0.14);
+          border-color: white;
+          transform: translateY(-2px);
+        }
         .btn-inscribirse {
           display: inline-block;
           background: white;
@@ -661,6 +695,8 @@ export default function Congress() {
           .congress-nav-btn { padding: 8px 14px; font-size: 13px; }
         }
         @media (max-width: 600px) {
+          .congress-inscripcion { flex-direction: column; align-items: stretch; }
+          .btn-inscribirse, .btn-programa { padding: 14px 24px; text-align: center; }
           .circulars-grid { grid-template-columns: 1fr; }
           .areas-grid { grid-template-columns: 1fr; }
           .congress-content { padding: 24px 20px; }

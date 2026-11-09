@@ -9,6 +9,6 @@ export const circulars = [
     id: 2,
     title: 'Circular N°2',
     desc: 'Segunda circular con detalles de áreas temáticas, normas de presentación y fechas límite de envío de trabajos.',
-    url: 'https://drive.google.com/file/d/1WaDNcnRHmP_j2tsYAOhlGOUt_fDQPyR2/view',
+    url: 'https://drive.google.com/file/d/1tG5DH4MOYLVFeuu-nt4NRVXCeZZAYHPq/view',
   },
 ]
