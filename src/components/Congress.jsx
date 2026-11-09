@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { circulars } from '../data/circulars'
 import congresLogo from '../assets/CONGRESO_LOGO.png'
 import racLogo from '../assets/RAC_LOGO.png'
 import sicLogo from '../assets/SIC_LOGO.jpeg'
@@ -7,20 +8,6 @@ import alpaLogo from '../assets/ALPA_LOGO.jpeg'
 import acpaLogo from '../assets/ACPA_LOGO.png'
 import acbcLogo from '../assets/ACBC_LOGO.jpeg'
 
-const circulars = [
-  {
-    id: 1,
-    title: 'Circular N°1',
-    desc: 'Primera circular informativa del VIII Congreso Americano de Cunicultura. Información general, fechas y convocatoria.',
-    url: 'https://drive.google.com/file/d/1cusXVBv-Si2nHt9pC49UlMHY9dHrfdMf/view',
-  },
-  {
-    id: 2,
-    title: 'Circular N°2',
-    desc: 'Segunda circular con detalles de áreas temáticas, normas de presentación y fechas límite de envío de trabajos.',
-    url: null,
-  },
-]
 
 const thematicAreas = [
   { code: 'AP',    title: 'Ambiente y Producción Animal',                              desc: 'Gestión social, ambiental y económica. Trabajos que aborden la cunicultura desde una visión sistémica: rentabilidad económica, impacto en comunidades rurales y modelos productivos sostenibles que minimicen la huella ambiental.' },
@@ -57,6 +44,18 @@ const scrollToContact = (e) => {
 
 export default function Congress() {
   const [activeMenu, setActiveMenu] = useState('circulares')
+
+  useEffect(() => {
+    const onNav = (e) => {
+      const { menu, scrollTo } = e.detail || {}
+      if (menu) setActiveMenu(menu)
+      requestAnimationFrame(() => {
+        document.querySelector(scrollTo || '#congreso')?.scrollIntoView({ behavior: 'smooth' })
+      })
+    }
+    window.addEventListener('congress:menu', onNav)
+    return () => window.removeEventListener('congress:menu', onNav)
+  }, [])
 
   return (
     <section id="congreso" className="congress">
@@ -138,7 +137,7 @@ export default function Congress() {
                 </div>
               </div>
 
-              <div className="submission-section">
+              <div className="submission-section" id="envio-trabajos">
                 <h4>Envío de Trabajos</h4>
                 <div className="submission-items">
                   <a

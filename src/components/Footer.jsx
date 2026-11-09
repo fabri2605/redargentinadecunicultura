@@ -1,4 +1,5 @@
 import racLogo from '../assets/RAC_LOGO.png'
+import { circulars } from '../data/circulars'
 
 const SvgEmail = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="18" height="18">
@@ -32,6 +33,11 @@ export default function Footer() {
   const handleNav = (e, href) => {
     e.preventDefault()
     document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  const handleCongressNav = (e, menu, scrollTo) => {
+    e.preventDefault()
+    window.dispatchEvent(new CustomEvent('congress:menu', { detail: { menu, scrollTo } }))
   }
 
   return (
@@ -75,10 +81,16 @@ export default function Footer() {
           <h4>Congreso</h4>
           <ul>
             <li><a href="#congreso" onClick={(e) => handleNav(e, '#congreso')}>VIII Congreso 2026</a></li>
-            <li><a href="#">Circular N°1</a></li>
-            <li><a href="#">Circular N°2</a></li>
-            <li><a href="#">Envío de Trabajos</a></li>
-            <li><a href="#">Preguntas Frecuentes</a></li>
+            {circulars.map(c => (
+              <li key={c.id}>
+                {c.url
+                  ? <a href={c.url} target="_blank" rel="noopener noreferrer">{c.title}</a>
+                  : <a href="#congreso" onClick={(e) => handleCongressNav(e, 'circulares')}>{c.title}</a>
+                }
+              </li>
+            ))}
+            <li><a href="#congreso" onClick={(e) => handleCongressNav(e, 'circulares', '#envio-trabajos')}>Envío de Trabajos</a></li>
+            <li><a href="#congreso" onClick={(e) => handleCongressNav(e, 'faq')}>Preguntas Frecuentes</a></li>
           </ul>
         </div>
 
