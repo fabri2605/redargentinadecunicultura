@@ -11,4 +11,10 @@ export const circulars = [
     desc: 'Segunda circular con detalles de áreas temáticas, normas de presentación y fechas límite de envío de trabajos.',
     url: 'https://drive.google.com/file/d/1tG5DH4MOYLVFeuu-nt4NRVXCeZZAYHPq/view',
   },
+  {
+    id: 3,
+    title: 'Circular N°3',
+    desc: 'Tercera circular con el programa del VIII Congreso Americano de Cunicultura.',
+    url: 'https://drive.google.com/file/d/1WaDNcnRHmP_j2tsYAOhlGOUt_fDQPyR2/view',
+  },
 ]
